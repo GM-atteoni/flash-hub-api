@@ -17,12 +17,16 @@ services:
   #     - node-postgres
   #   depends_on:
   #     - db
-  
+
   db:
     image: postgres
     restart: always
     volumes:
       - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: flash-hub
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
     networks:
       - node-postgres
     # This is for PROD only 
@@ -36,7 +40,6 @@ volumes:
 networks:
   node-postgres:
 
+    #Please note - if your NestJS image already exists (for example, if you tested building the full image in the Dockerfile above), 
+    #you can run (docker-compose up -d --build) to rebuild the image.
 
-
-#Please note - if your NestJS image already exists (for example, if you tested building the full image in the Dockerfile above), 
-#you can run (docker-compose up -d --build) to rebuild the image.
